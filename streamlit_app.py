@@ -20,12 +20,6 @@ from langchain.chains.summarize import load_summarize_chain
 # In[ ]:
 
 
-openai_api_key="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"
-
-
-# In[ ]:
-
-
 def generate_response(txt):
     # Instantiate the LLM model
     llm = OpenAI(temperature=0, openai_api_key=openai_api_key)
