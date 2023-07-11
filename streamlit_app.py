@@ -25,7 +25,7 @@ st.title('🦜🔗 Document Summarization App')
 
 
 # Text input
-txt_input = st.text_area('Enter your text', '', height=100)
+txt_input = st.text_area('Enter your text', '', height=200)
 
 # Form to accept user's text input for summarization
 result = []
