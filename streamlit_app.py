@@ -1,23 +1,9 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
-!pip install streamlit langchain openai tiktoken
-
-
-# In[ ]:
-
-
 import streamlit as st
 from langchain import OpenAI
 from langchain.docstore.document import Document
 from langchain.text_splitter import CharacterTextSplitter
 from langchain.chains.summarize import load_summarize_chain
 
-
-# In[ ]:
 
 
 def generate_response(txt):
@@ -33,15 +19,9 @@ def generate_response(txt):
     return chain.run(docs)
 
 
-# In[ ]:
-
-
 # Page title
 st.set_page_config(page_title='🦜🔗 Document Summarization App')
 st.title('🦜🔗 Document Summarization App')
-
-
-# In[ ]:
 
 
 # Text input
@@ -60,10 +40,4 @@ with st.form('summarize_form', clear_on_submit=True):
 
 if len(result):
     st.info(response)
-
-
-# In[ ]:
-
-
-
-
+    
