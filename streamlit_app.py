@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-get_ipython().system('pip3 install streamlit langchain openai tiktoken')
+'pip3 install streamlit langchain openai tiktoken'
 
 
 # In[ ]:
