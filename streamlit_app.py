@@ -4,7 +4,7 @@
 # In[ ]:
 
 
-pip3 install streamlit langchain openai tiktoken
+pip install streamlit langchain openai tiktoken
 
 
 # In[ ]:
