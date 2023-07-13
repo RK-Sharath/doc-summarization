@@ -13,9 +13,9 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 
 
 # File input
-uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
-if uploaded_file is not None:
-    data = extract_data(uploaded_file)
+doc_input = st.file_uploader('Choose your .pdf file', type="pdf")
+if doc_input is not None:
+    data = extract_data(doc_input)
 
 def extract_data(feed):
     data = []
@@ -50,7 +50,7 @@ st.title('🦜🔗 Document Summarization App')
 
 
 # File input
-doc_input = st.file_uploader('Choose your .pdf file', type="pdf")
+#doc_input = st.file_uploader('Choose your .pdf file', type="pdf")
 
 # Form to accept user's input for summarization
 result = []
