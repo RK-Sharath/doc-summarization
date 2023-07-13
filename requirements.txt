@@ -2,3 +2,5 @@ streamlit
 langchain
 openai
 tiktoken
+ibm-generative-ai
+ibm-generative-ai[langchain]
