@@ -50,7 +50,7 @@ def generate_res(text):
 # Form to accept user's input for summarization
 result = []
 with st.form('summarize_form', clear_on_submit=True):
-    genai_api_key = st.text_input('GenAI API Key', type = 'password', disabled=not text)
+    genai_api_key = st.text_input('GenAI API Key', type = 'password', disabled=not)
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
