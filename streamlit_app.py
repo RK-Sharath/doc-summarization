@@ -26,7 +26,7 @@ def generate_res(doc):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.split_documents(doc)
+    chunked_docs = splitter.create_documents(doc)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
