@@ -49,8 +49,9 @@ with st.form('summarize_form', clear_on_submit=True):
         with st.spinner('Working on it...'):
             response = generate_res(doc_input)
             result.append(response)
+            st.info(response)
             del genai_api_key
 
 #if len(result):
-st.info(response)
+#st.info(response)
     
