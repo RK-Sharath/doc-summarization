@@ -13,7 +13,7 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 
 
 
-def generate_res():
+def generate_res(txt):
     #Define llm
     llm = LangChainInterface(
         model=ModelType.FLAN_T5_11B,
@@ -26,7 +26,7 @@ def generate_res():
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents()
+    chunked_docs = splitter.create_documents(txt)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
@@ -47,7 +47,7 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res()
+            response = generate_res(txt)
             result.append(response)
             del genai_api_key
 
