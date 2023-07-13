@@ -12,14 +12,18 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
 
 
+
 # Page title
 st.set_page_config(page_title='🦜🔗 Document Summarization App')
 st.title('🦜🔗 Document Summarization App')
 
 # File input
 doc = st.file_uploader('Choose your .pdf file', type="pdf")
+text = ""
+for page in doc:
+   text+=page.get_text()
 
-def generate_res(doc):
+def generate_res(text):
     #Define llm
     llm = LangChainInterface(
         model=ModelType.FLAN_T5_11B,
@@ -32,7 +36,7 @@ def generate_res(doc):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents(doc)
+    chunked_docs = splitter.create_documents(text)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
@@ -42,11 +46,11 @@ def generate_res(doc):
 # Form to accept user's input for summarization
 result = []
 with st.form('summarize_form', clear_on_submit=True):
-    genai_api_key = st.text_input('GenAI API Key', type = 'password', disabled=not doc)
+    genai_api_key = st.text_input('GenAI API Key', type = 'password', disabled=not text)
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res(doc)
+            response = generate_res(text)
             result.append(response)
             del genai_api_key
 
