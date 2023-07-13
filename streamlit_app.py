@@ -16,7 +16,7 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 def generate_res(doc):
     #Define llm
     llm = LangChainInterface(
-        model="google/flan-t5-xxl",
+        model=ModelType.FLAN_T5_11B,
         credentials=Credentials(api_key=genai_api_key),
         params=GenerateParams(
             decoding_method="greedy",
@@ -26,7 +26,7 @@ def generate_res(doc):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.split_documents(pages)
+    chunked_docs = splitter.split_documents(doc)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
