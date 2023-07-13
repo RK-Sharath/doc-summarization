@@ -13,7 +13,7 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 
 
 
-def generate_res(doc):
+def generate_res():
     #Define llm
     llm = LangChainInterface(
         model=ModelType.FLAN_T5_11B,
@@ -26,7 +26,7 @@ def generate_res(doc):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents(doc)
+    chunked_docs = splitter.create_documents()
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
