@@ -16,13 +16,13 @@ import pdfplumber
 
 def extract_data(feed):
     data = []
-    with pdfplumber.load(feed) as pdf:
+    with pdfplumber.open(feed) as pdf:
         pages = pdf.pages
         for p in pages:
-            data.append(p.extract_tables())
+            data.append(p.extract_text())
     return None
 
-def generate_res(data):
+def generate_res(feed):
     #Define llm
     llm = LangChainInterface(
         model=ModelType.FLAN_T5_11B,
@@ -35,7 +35,7 @@ def generate_res(data):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents(data)
+    chunked_docs = splitter.create_documents(feed)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
