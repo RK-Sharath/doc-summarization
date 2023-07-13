@@ -51,6 +51,6 @@ with st.form('summarize_form', clear_on_submit=True):
             result.append(response)
             del genai_api_key
 
-if len(result):
-    st.info(response)
+#if len(result):
+st.info(response)
     
