@@ -12,8 +12,20 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
 
 
+# File input
+uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
+if uploaded_file is not None:
+    data = extract_data(uploaded_file)
 
-def generate_res(txt):
+def extract_data(feed):
+    data = []
+    with pdfplumber.load(feed) as pdf:
+        pages = pdf.pages
+        for p in pages:
+            data.append(p.extract_tables())
+    return None
+
+def generate_res(data):
     #Define llm
     llm = LangChainInterface(
         model=ModelType.FLAN_T5_11B,
@@ -26,7 +38,7 @@ def generate_res(txt):
         ).dict())
     # Split text
     splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents(txt)
+    chunked_docs = splitter.create_documents(data)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(chunked_docs)
@@ -51,6 +63,6 @@ with st.form('summarize_form', clear_on_submit=True):
             result.append(response)
             del genai_api_key
 
-#if len(result):
-#st.info(response)
+if len(result):
+st.info(response)
     
