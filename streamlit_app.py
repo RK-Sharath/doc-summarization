@@ -16,7 +16,7 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 def generate_res(doc):
     #Define llm
     llm = LangChainInterface(
-        model=google/flan-t5-xxl,
+        model="google/flan-t5-xxl",
         credentials=Credentials(api_key=genai_api_key),
         params=GenerateParams(
             decoding_method="greedy",
