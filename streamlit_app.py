@@ -10,22 +10,21 @@ from langchain.chains.mapreduce import MapReduceChain
 from langchain.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
-import pdfminer
-from pdfminer.high_level import extract_pages
+from langchain.document_loaders import PyPDFLoader
 
 
 
 # Page title
 st.set_page_config(page_title='🦜🔗 Document Summarization App')
-st.title('🦜🔗 Document Summarization App')
+st.title('🦜🔗 Ask questions about the document')
 
 # File input
 
 uploaded_file = st.file_uploader("Choose a file", "pdf")
-if uploaded_file is not None:
-    for page_layout in extract_pages(uploaded_file):
-        for element in page_layout:
-            st.write(element)
+loaders = PyPDFLoader(uploaded_file)
+index = VectorstoreIndexCreator().from_loaders([loaders])
+
+
 
 def generate_res(text):
     #Define llm
@@ -38,12 +37,9 @@ def generate_res(text):
             min_new_tokens=150,
             repetition_penalty=2,
         ).dict())
-    # Split text
-    splitter = CharacterTextSplitter(chunk_size=2000, chunk_overlap=200)
-    chunked_docs = splitter.create_documents(text)
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(chunked_docs)
+    return chain.run(index)
 
 
 
