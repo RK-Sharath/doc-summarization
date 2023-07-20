@@ -51,7 +51,7 @@ llm = LangChainInterface(model="google/flan-t5-xxl",
 
 def generate_response(query):
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain
+    return chain.run(docs)
 
 with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
