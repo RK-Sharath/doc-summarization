@@ -35,7 +35,7 @@ if uploaded_file is not None:
     text_splitter = CharacterTextSplitter()
     texts = text_splitter.create_documents(string_data)
     # Create multiple documents
-    #docs = [Document(page_content=t) for t in texts]
+    docs = [Document(page_content=t) for t in texts]
     #st.write(texts)
 
 def generate_res(data):
@@ -53,7 +53,7 @@ def generate_res(data):
      
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(texts)
+    return chain.run(docs)
     
 
 result = []
