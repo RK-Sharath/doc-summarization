@@ -32,22 +32,28 @@ if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     string_data = stringio.read()
     #st.write(string_data)
-text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
-chunked_docs = text_splitter.split_text(string_data)
-docs = [Document(page_content=t) for t in chunked_docs]
-#st.write(len(docs))
 
-llm = LangChainInterface(model="google/flan-t5-xxl",
-                         credentials=Credentials(api_key=genai_api_key),
-                         params=GenerateParams(
-                             decoding_method="greedy",
-                             max_new_tokens=max_new_tokens,
-                             min_new_tokens=min_new_tokens,
-                             repetition_penalty=2,
-                         ).dict()
-                        ) 
-
-def generate_response(query):
+def generate_res(string_data):
+     
+    # Instantiate the LLM model
+    llm = LangChainInterface(
+    model="google/flan-t5-xxl",
+    credentials=Credentials(api_key=genai_api_key),
+    params=GenerateParams(
+    decoding_method="greedy",
+    max_new_tokens=max_new_tokens,
+    min_new_tokens=min_new_tokens,
+    repetition_penalty=2,
+    ).dict()) 
+     
+    # Split text
+    text_splitter = CharacterTextSplitter()
+    texts = text_splitter.split_text(string_data)
+     
+    # Create multiple documents
+    docs = [Document(page_content=t) for t in texts]
+     
+    # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(docs)
 
@@ -55,6 +61,6 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_response(string_data)
+            response = generate_res(string_data)
             st.write(response)
     
