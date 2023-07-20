@@ -54,7 +54,7 @@ def generate_res(data):
     ).dict()) 
      
     # Text summarization
-    text_splitter = CharacterTextSplitter()
+    text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
     texts = text_splitter.create_documents(data)
     #docs = [Document(page_content=t) for t in texts]
 
