@@ -25,7 +25,6 @@ st.title('🦜🔗 Ask questions about the document')
 uploaded_file = st.file_uploader("Add text file !")
 if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    #st.write(stringio)
     string_data = stringio.read()
     st.write(string_data)
 
