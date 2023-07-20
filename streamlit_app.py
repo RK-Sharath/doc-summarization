@@ -29,7 +29,7 @@ if uploaded_file is not None:
     #st.write(string_data)
 
 text_splitter = CharacterTextSplitter()
-chunked_docs = text_splitter.split_documents(string_data)
+chunked_docs = text_splitter.split_text(string_data)
 docs = [Document(page_content=t) for t in chunked_docs]
 st.write(len(docs))
 
