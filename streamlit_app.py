@@ -48,7 +48,7 @@ def generate_res(data):
      
     # Split text
     text_splitter = CharacterTextSplitter()
-    texts = text_splitter.split_text(data)
+    texts = text_splitter.split_documents(data)
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
      
