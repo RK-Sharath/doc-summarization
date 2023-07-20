@@ -28,9 +28,13 @@ min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 # File input
 
 uploaded_file = st.file_uploader("Add text file !")
-if uploaded_file is not None:
+
+def extract_data():
+    if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     string_data = stringio.read()
+    return string_data
+    
     #st.write(string_data)
     # Create multiple documents
     #docs = [Document(page_content=t) for t in texts]
@@ -63,7 +67,7 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res(string_data)
+            response = generate_res(extract_data())
             result.append(response)
             del genai_api_key
 
