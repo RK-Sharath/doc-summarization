@@ -36,9 +36,9 @@ if uploaded_file is not None:
     texts = text_splitter.split_text(string_data)
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
-    st.write(docs)
+    #st.write(docs)
 
-def generate_res(data):
+def generate_res(doc):
      
     # Instantiate the LLM model
     llm = LangChainInterface(
@@ -51,12 +51,9 @@ def generate_res(data):
     repetition_penalty=2,
     ).dict()) 
      
-  
-
-     
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(docs)
+    return chain.run(doc)
     
 
 result = []
