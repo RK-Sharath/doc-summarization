@@ -32,8 +32,6 @@ if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     string_data = stringio.read()
     #st.write(string_data)
-    text_splitter = CharacterTextSplitter()
-    texts = text_splitter.create_documents(string_data)
     # Create multiple documents
     #docs = [Document(page_content=t) for t in texts]
     #st.write(texts)
@@ -52,6 +50,9 @@ def generate_res(data):
     ).dict()) 
      
     # Text summarization
+    text_splitter = CharacterTextSplitter()
+    texts = text_splitter.create_documents(string_data)
+
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(texts)
     
@@ -61,7 +62,7 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res(string_data)
+            response = generate_res(stringio)
             result.append(response)
             del genai_api_key
 
