@@ -18,7 +18,7 @@ from io import StringIO
 
 # Page title
 st.set_page_config(page_title='🦜🔗 Document Summarization App')
-st.title('🦜🔗 Ask questions about the document')
+st.title('🦜🔗 Summarize the document')
 
 genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
 genai_api_url = st.sidebar.text_input("GenAI API URL", type="default")
@@ -57,10 +57,14 @@ def generate_res(string_data):
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(docs)
 
+result = []
 with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
             response = generate_res(string_data)
-            st.write(response)
+            result.append(response)
+
+if len(result):
+     st.info(response)
     
