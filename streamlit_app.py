@@ -32,6 +32,10 @@ if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     string_data = stringio.read()
     #st.write(string_data)
+    text_splitter = CharacterTextSplitter()
+    texts = text_splitter.split_documents(data)
+    # Create multiple documents
+    docs = [Document(page_content=t) for t in texts]
 
 def generate_res(data):
      
@@ -46,11 +50,8 @@ def generate_res(data):
     repetition_penalty=2,
     ).dict()) 
      
-    # Split text
-    text_splitter = CharacterTextSplitter()
-    texts = text_splitter.split_documents(data)
-    # Create multiple documents
-    docs = [Document(page_content=t) for t in texts]
+  
+
      
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
