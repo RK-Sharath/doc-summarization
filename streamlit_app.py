@@ -11,6 +11,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
 from langchain.document_loaders import PyPDFLoader
+import pdfplumber
 
 
 
