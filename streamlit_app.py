@@ -20,10 +20,6 @@ from io import StringIO
 st.set_page_config(page_title='🦜🔗 Document Summarization App')
 st.title('🦜🔗 Ask questions about the document')
 
-genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
-genai_api_url = st.sidebar.text_input("GenAI API URL", type="default")
-max_new_tokens = st.sidebar.text_input("Select max new tokens", type="default")
-min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 
 # File input
 
@@ -32,6 +28,11 @@ if uploaded_file is not None:
     stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
     string_data = stringio.read()
     #st.write(string_data)
+
+genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
+genai_api_url = st.sidebar.text_input("GenAI API URL", type="default")
+max_new_tokens = st.sidebar.text_input("Select max new tokens", type="default")
+min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 
 text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
 chunked_docs = text_splitter.split_text(string_data)
