@@ -12,6 +12,7 @@ from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
 from langchain.document_loaders import PyPDFLoader
 import pdfplumber
+from io import StringIO
 
 
 
@@ -22,9 +23,8 @@ st.title('🦜🔗 Ask questions about the document')
 # File input
 
 uploaded_file = st.file_uploader("Add text file !")
-if uploaded_file:
-    for line in uploaded_file:
-        st.write(line)
-        str(line, "UTF-8") 
+if uploaded_file is not None:
+    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+    st.write(stringio)
 
     
