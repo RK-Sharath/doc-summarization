@@ -33,7 +33,7 @@ if uploaded_file is not None:
     string_data = stringio.read()
     #st.write(string_data)
     text_splitter = CharacterTextSplitter()
-    texts = text_splitter.split_documents(data)
+    texts = text_splitter.split_documents(string_data)
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
 
