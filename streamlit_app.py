@@ -30,6 +30,6 @@ if uploaded_file is not None:
 
 text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=20)
 chunked_docs = text_splitter.split_documents(string_data)
-st.write(len(chunked_docs)
+st.write(len(chunked_docs))
 
     
