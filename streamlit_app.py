@@ -25,6 +25,6 @@ uploaded_file = st.file_uploader("Add text file !")
 if uploaded_file:
     for line in uploaded_file:
         st.write(line)
-        txt=line.decode('UTF-8') 
+        line.decode('UTF-8') 
 
     
