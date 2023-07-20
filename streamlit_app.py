@@ -27,6 +27,4 @@ if uploaded_file:
         st.write(line)
         txt=line.decode('UTF-8') 
 
-print(txt)
-
     
