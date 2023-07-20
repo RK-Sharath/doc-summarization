@@ -49,13 +49,13 @@ def generate_res(string_data):
     # Split text
     text_splitter = CharacterTextSplitter()
     texts = text_splitter.split_text(string_data)
-     
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
      
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(docs)
+    
 
 result = []
 with st.form('summarize_form', clear_on_submit=True):
