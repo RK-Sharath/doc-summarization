@@ -53,7 +53,7 @@ def generate_res(data):
      
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(data)
+    return chain.run(texts)
     
 
 result = []
