@@ -52,10 +52,10 @@ def generate_res(data):
     # Text summarization
     text_splitter = CharacterTextSplitter()
     texts = text_splitter.create_documents(data)
-    docs = [Document(page_content=t) for t in texts]
+    #docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(docs)
+    return chain.run(texts)
     
 
 result = []
