@@ -51,10 +51,11 @@ def generate_res(data):
      
     # Text summarization
     text_splitter = CharacterTextSplitter()
-    texts = text_splitter.create_documents(string_data)
+    texts = text_splitter.create_documents(data)
+    docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(texts)
+    return chain.run(docs)
     
 
 result = []
@@ -62,7 +63,7 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res(stringio)
+            response = generate_res(string_data)
             result.append(response)
             del genai_api_key
 
