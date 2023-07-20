@@ -31,9 +31,9 @@ uploaded_file = st.file_uploader("Add text file !")
 
 def extract_data():
     if uploaded_file is not None:
-    stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-    string_data = stringio.read()
-    return string_data
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+        string_data = stringio.read()
+        return string_data
     
     #st.write(string_data)
     # Create multiple documents
