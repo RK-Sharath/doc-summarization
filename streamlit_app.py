@@ -38,7 +38,7 @@ if uploaded_file is not None:
     docs = [Document(page_content=t) for t in texts]
     #st.write(docs)
 
-def generate_res(doc):
+def generate_res(file):
      
     # Instantiate the LLM model
     llm = LangChainInterface(
@@ -53,7 +53,7 @@ def generate_res(doc):
      
     # Text summarization
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(doc)
+    return chain.run(docs)
     
 
 result = []
@@ -61,7 +61,7 @@ with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
     if submitted and genai_api_key.startswith('pak-'):
         with st.spinner('Working on it...'):
-            response = generate_res(doc)
+            response = generate_res(uploaded_file)
             result.append(response)
             del genai_api_key
 
