@@ -28,8 +28,9 @@ if uploaded_file is not None:
     string_data = stringio.read()
     #st.write(string_data)
 
-text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=20)
+text_splitter = CharacterTextSplitter()
 chunked_docs = text_splitter.split_documents(string_data)
-st.write(len(chunked_docs))
+docs = [Document(page_content=t) for t in chunked_docs]
+st.write(len(docs))
 
     
