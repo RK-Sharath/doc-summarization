@@ -36,6 +36,7 @@ if uploaded_file is not None:
     texts = text_splitter.split_text(string_data)
     # Create multiple documents
     docs = [Document(page_content=t) for t in texts]
+    st.write(docs)
 
 def generate_res(data):
      
