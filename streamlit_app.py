@@ -35,8 +35,8 @@ if uploaded_file is not None:
     text_splitter = CharacterTextSplitter()
     texts = text_splitter.split_text(string_data)
     # Create multiple documents
-    docs = [Document(page_content=t) for t in texts]
-    #st.write(docs)
+    #docs = [Document(page_content=t) for t in texts]
+    st.write(texts)
 
 def generate_res(file):
      
