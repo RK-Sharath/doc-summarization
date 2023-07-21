@@ -13,6 +13,7 @@ from langchain import OpenAI, PromptTemplate, LLMChain
 from langchain.document_loaders import PyPDFLoader
 import pdfplumber
 from io import StringIO
+from langchain import OpenAI
 
 
 
