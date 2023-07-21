@@ -10,11 +10,9 @@ from langchain.chains.mapreduce import MapReduceChain
 from langchain.prompts import PromptTemplate
 from langchain.chains.summarize import load_summarize_chain
 from langchain import OpenAI, PromptTemplate, LLMChain
-from langchain.document_loaders import PyPDFLoader
-import pdfplumber
 from io import StringIO
 from langchain import OpenAI
-
+from langchain.document_loaders import TextLoader
 
 
 # Page title
@@ -29,22 +27,14 @@ min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 # File input
 
 uploaded_file = st.file_uploader("Add text file !")
-stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-txt_data = stringio.read()
-st.write(txt_data)
-st.write(len(txt_data))
+loader = TextLoader(uploaded_file)
+loaded_docs=loader.load()
+st.write(loaded_docs)
 
-text_splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=100)
-texts = text_splitter.split_text(txt_data)
-st.write(texts)
-st.write(len(texts))
-docs = [Document(page_content=t) for t in texts]
-st.write(docs)
-    
-    #st.write(string_data)
-    # Create multiple documents
-    #docs = [Document(page_content=t) for t in texts]
-    #st.write(texts)
+splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=10)
+chunked_docs = splitter.split_documents(loaded_docs)
+st.write(len(chunked_docs)
+         
 
 def generate_res(text):
      
