@@ -14,7 +14,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.callbacks.base import CallbackManager
 from langchain.embeddings import HuggingFaceEmbeddings
-from langchain.embeddings import HuggingFaceInstructEmbeddings
+#from langchain.embeddings import HuggingFaceInstructEmbeddings
 from langchain.vectorstores import Chroma
 
 
@@ -25,8 +25,8 @@ st.title('🦜🔗 Ask questions about your document')
 
 #genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
 genai_api_url = st.sidebar.text_input("GenAI API URL", type="default")
-max_new_tokens = st.sidebar.text_input("Select max new tokens", type="default")
-min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
+chunk_size = st.sidebar.text_input("Select chunk_size", type="default")
+overlap = st.sidebar.text_input("Select overlap", type="default")
 
 @st.cache_data
 def load_docs(files):
@@ -76,7 +76,8 @@ def main():
 
 # Use RecursiveCharacterTextSplitter as the default and only text splitter
     splitter_type = "RecursiveCharacterTextSplitter"
-    embeddings = HuggingFaceInstructEmbeddings()
+    embeddings = HuggingFaceEmbeddings()
+    #embeddings = HuggingFaceInstructEmbeddings()
 
     if 'genai_api_key' not in st.session_state:
         genai_api_key = st.text_input(
