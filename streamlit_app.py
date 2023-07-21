@@ -43,16 +43,9 @@ def extract_data():
 def generate_res(data):
      
     # Instantiate the LLM model
-    llm = LangChainInterface(
-    model="google/flan-t5-xxl",
-    credentials=Credentials(api_key=genai_api_key),
-    params=GenerateParams(
-    decoding_method="greedy",
-    max_new_tokens=max_new_tokens,
-    min_new_tokens=min_new_tokens,
-    repetition_penalty=2,
-    ).dict()) 
-     
+
+    llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
+    
     # Text summarization
     text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
     texts = text_splitter.create_documents(data)
