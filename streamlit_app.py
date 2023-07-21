@@ -52,8 +52,8 @@ def generate_res(data):
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
     return chain.run(texts)
-    
-data = extract_data()
+
+
 result = []
 with st.form('summarize_form', clear_on_submit=True):
     submitted = st.form_submit_button('Submit')
