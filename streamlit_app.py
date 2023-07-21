@@ -33,7 +33,7 @@ if uploaded_file:
     for line in uploaded_file:
         text = st.write(line)
 
-text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
+text_splitter = CharacterTextSplitter()
 texts = text_splitter.split_text(text)
 st.write(texts)
     
