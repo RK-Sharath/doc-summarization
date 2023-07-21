@@ -31,7 +31,7 @@ min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 uploaded_file = st.file_uploader("Add text file !")
 if uploaded_file:
     for line in uploaded_file:
-        st.write(line)
+        text = st.write(line)
 
 
     
