@@ -110,7 +110,10 @@ def main():
         num_chunks = len(splits)
         st.write(f"Number of text chunks: {num_chunks}")
         retriever = create_retriever(embeddings, splits)
-        qa = RetrievalQA.from_chain_type(llm=chat_openai, retriever=retriever, chain_type="stuff", verbose=True)
+        creds = Credentials(api_key=genai_api_key, api_endpoint=genai_api_url)
+        params = GenerateParams(decoding_method="greedy", temperature=0.7, max_new_tokens=400, min_new_tokens=0, repetition_penalty=2)
+        llm=LangChainInterface(model=ModelType.FLAN_UL2, params=params, credentials=creds)
+        qa = RetrievalQA.from_chain_type(llm=llm, retriever=retriever, chain_type="stuff", verbose=True)
         st.write("Ready to answer questions.")
         
          # Question and answering
