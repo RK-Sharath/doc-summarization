@@ -23,7 +23,7 @@ st.set_page_config(page_title='🔗 Retriever Augmented Generation Demo')
 st.caption("This demo is prepared by Sharath Kumar RK, Senior Data Scientist, Watsonx team")
 st.title('🦜🔗 Ask questions about your document')
 
-genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
+#genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
 genai_api_url = st.sidebar.text_input("GenAI API URL", type="default")
 max_new_tokens = st.sidebar.text_input("Select max new tokens", type="default")
 min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
@@ -80,9 +80,9 @@ def main():
 
     if 'genai_api_key' not in st.session_state:
         genai_api_key = st.text_input(
-            'Please enter your GenAI API key or [get one here](https://platform.openai.com/account/api-keys)', value="", placeholder="Enter the GenAI API key which begins with pak-")
+            'Please enter your GenAI API key', value="", placeholder="Enter the GenAI API key which begins with pak-")
         if genai_api_key:
-            st.session_state.openai_api_key = genai_api_key
+            st.session_state.genai_api_key = genai_api_key
             os.environ["GENAI_API_KEY"] = genai_api_key
         else:
             return
