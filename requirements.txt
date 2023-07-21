@@ -2,5 +2,4 @@ streamlit
 langchain
 ibm-generative-ai
 ibm-generative-ai[langchain]
-pdfplumber
-pypdf
+openai
