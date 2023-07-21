@@ -37,6 +37,7 @@ st.write(len(txt_data))
 text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
 texts = text_splitter.split_text(txt_data)
 st.write(texts)
+st.write(len(texts))
     
     #st.write(string_data)
     # Create multiple documents
