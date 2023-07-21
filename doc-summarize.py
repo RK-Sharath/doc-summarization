@@ -74,6 +74,7 @@ def split_texts(text, chunk_size, overlap, split_method):
 
 
 def main():
+    global genai_api_key
 
 # Use RecursiveCharacterTextSplitter as the default and only text splitter
     splitter_type = "RecursiveCharacterTextSplitter"
