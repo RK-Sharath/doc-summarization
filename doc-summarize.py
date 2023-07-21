@@ -51,13 +51,13 @@ def load_docs(files):
     
 @st.cache_resource
 def create_retriever(_embeddings, splits):
-    global splits
     vectorstore = Chroma.from_texts(splits, _embeddings)
     retriever = vectorstore.as_retriever
     return retriever
 
 @st.cache_resource
 def split_texts(text, chunk_size, overlap, split_method):
+        global splits
 
     st.info("`Splitting doc ...`")
 
