@@ -48,13 +48,6 @@ def load_docs(files):
             st.warning('Please provide txt or pdf file.', icon="⚠️")
     return all_text
          
-
-@st.cache_resource
-def create_retriever(_embeddings, splits):
-         vectorstore = Chroma.from_texts(splits, _embeddings)
-         retriever = vectorstore.as_retriever
-         return retriever
-
 @st.cache_resource
 def split_texts(text, chunk_size, overlap, split_method):
 
@@ -70,6 +63,14 @@ def split_texts(text, chunk_size, overlap, split_method):
         st.stop()
 
     return splits
+    
+@st.cache_resource
+def create_retriever(_embeddings, splits):
+         vectorstore = Chroma.from_texts(splits, _embeddings)
+         retriever = vectorstore.as_retriever
+         return retriever
+
+
 
 
 def main():
