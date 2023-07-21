@@ -35,31 +35,4 @@ splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=10)
 chunked_docs = splitter.split_documents(loaded_docs)
 st.write(len(chunked_docs)
          
-
-def generate_res(text):
-     
-    # Instantiate the LLM model
-    llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
-    
-    # Text summarization
-    #text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
-    #texts = text_splitter.split_text(text)
-    #docs = [Document(page_content=t) for t in texts]
-
-    chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(docs)
-
-
-#result = []
-with st.form('summarize_form', clear_on_submit=True):
-    submitted = st.form_submit_button('Submit')
-    if submitted and genai_api_key.startswith('sk-'):
-        with st.spinner('Working on it...'):
-            response = generate_res(txt_data)
-            st.write(response)
-            #result.append(response)
-            #del genai_api_key
-
-#if len(result):
-     #st.info(response)
     
