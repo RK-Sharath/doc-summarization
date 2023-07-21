@@ -50,8 +50,8 @@ def load_docs(files):
          
     
 #@st.cache_resource
-def create_retriever(_embeddings, chunks):
-    vectorstore = Chroma.from_texts(chunks, _embeddings)
+def create_retriever(_embeddings, splits):
+    vectorstore = Chroma.from_texts(splits, _embeddings)
     retriever = vectorstore.as_retriever()
     return retriever
 
@@ -109,16 +109,15 @@ def main():
         # Display the number of text chunks
         num_chunks = len(splits)
         st.write(f"Number of text chunks: {num_chunks}")
-
-    retriever = create_retriever(embeddings, splits)
-    qa = RetrievalQA.from_chain_type(llm=chat_openai, retriever=retriever, chain_type="stuff", verbose=True)
-    st.write("Ready to answer questions.")
-
-        # Question and answering
-    user_question = st.text_input("Enter your question:")
-    if user_question:
-        answer = qa.run(user_question)
-        st.write("Answer:", answer)
+        retriever = create_retriever(embeddings, splits)
+        qa = RetrievalQA.from_chain_type(llm=chat_openai, retriever=retriever, chain_type="stuff", verbose=True)
+        st.write("Ready to answer questions.")
+        
+         # Question and answering
+         user_question = st.text_input("Enter your question:")
+         if user_question:
+             answer = qa.run(user_question)
+             st.write("Answer:", answer)
 
 
 if __name__ == "__main__":
