@@ -47,7 +47,7 @@ def generate_res(text):
     
     # Text summarization
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
-    texts = text_splitter.create_documents(text)
+    texts = text_splitter.split_text(text)
     docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
