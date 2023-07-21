@@ -57,7 +57,7 @@ def create_retriever(_embeddings, splits):
 
 @st.cache_resource
 def split_texts(text, chunk_size, overlap, split_method):
-        global splits
+    global splits
 
     st.info("`Splitting doc ...`")
 
