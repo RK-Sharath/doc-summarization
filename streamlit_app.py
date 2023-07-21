@@ -33,6 +33,6 @@ st.write(loaded_docs)
 
 splitter = CharacterTextSplitter(chunk_size=1500, chunk_overlap=10)
 chunked_docs = splitter.split_documents(loaded_docs)
-st.write(len(chunked_docs)
+st.write(len(chunked_docs))
          
     
