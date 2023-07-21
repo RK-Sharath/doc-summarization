@@ -32,6 +32,7 @@ uploaded_file = st.file_uploader("Add text file !")
 stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
 txt_data = stringio.read()
 st.write(txt_data)
+st.write(len(txt_data))
 
 text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
 texts = text_splitter.split_text(txt_data)
