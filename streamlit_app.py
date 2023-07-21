@@ -29,12 +29,11 @@ min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 # File input
 
 uploaded_file = st.file_uploader("Add text file !")
+if uploaded_file:
+    for line in uploaded_file:
+        st.write(line)
 
-def extract_data():
-    if uploaded_file is not None:
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        string_data = stringio.read()
-        return string_data
+
     
     #st.write(string_data)
     # Create multiple documents
@@ -47,7 +46,7 @@ def generate_res(data):
     llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
     
     # Text summarization
-    text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
+    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
     texts = text_splitter.create_documents(data)
     #docs = [Document(page_content=t) for t in texts]
 
