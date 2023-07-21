@@ -20,7 +20,7 @@ from langchain.vectorstores import Chroma
 
 # Page title
 st.set_page_config(page_title='🔗 Retriever Augmented Generation Demo')
-st.caption(This demo was prepared by Sharath Kumar RK, Senior Data Scientist, Watsonx team)
+st.caption("This demo is prepared by Sharath Kumar RK, Senior Data Scientist, Watsonx team")
 st.title('🦜🔗 Ask questions about your document')
 
 genai_api_key = st.sidebar.text_input("GenAI API Key", type="password")
