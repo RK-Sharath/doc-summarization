@@ -57,7 +57,7 @@ def generate_res(text):
     #docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
-    return chain.run(texts)
+    return chain.run(docs)
 
 
 #result = []
