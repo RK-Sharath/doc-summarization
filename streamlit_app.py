@@ -76,9 +76,7 @@ def main():
 
 # Use RecursiveCharacterTextSplitter as the default and only text splitter
     splitter_type = "RecursiveCharacterTextSplitter"
-    embeddings = HuggingFaceInstructEmbeddings(model_name="hkunlp/instructor-large",
-                                               model_kwargs={"device": "cpu"}
-                                              )
+    embeddings = HuggingFaceInstructEmbeddings()
 
     if 'genai_api_key' not in st.session_state:
         genai_api_key = st.text_input(
