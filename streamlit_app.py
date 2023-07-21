@@ -44,7 +44,6 @@ def extract_data():
 def generate_res(data):
      
     # Instantiate the LLM model
-
     llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
     
     # Text summarization
