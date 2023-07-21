@@ -30,8 +30,9 @@ min_new_tokens = st.sidebar.text_input("Select min new tokens", type="default")
 
 uploaded_file = st.file_uploader("Add text file !")
 if uploaded_file:
-    for line in uploaded_file:
-        text = st.write(line)
+    stringio = StringIO(uploaded_file.getvalue().decode("utf-8")):
+    txt_data = stringio.read()
+    st.write(txt_data
 
 text_splitter = CharacterTextSplitter()
 texts = text_splitter.split_text(text)
