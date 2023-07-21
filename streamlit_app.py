@@ -33,7 +33,9 @@ if uploaded_file:
     for line in uploaded_file:
         text = st.write(line)
 
-
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
+texts = text_splitter.split_text(text)
+st.write(texts)
     
     #st.write(string_data)
     # Create multiple documents
@@ -46,8 +48,8 @@ def generate_res(text):
     llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
     
     # Text summarization
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
-    texts = text_splitter.split_text(text)
+    #text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
+    #texts = text_splitter.split_text(text)
     #docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
