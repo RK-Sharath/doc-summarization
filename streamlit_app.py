@@ -38,6 +38,8 @@ text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=10)
 texts = text_splitter.split_text(txt_data)
 st.write(texts)
 st.write(len(texts))
+docs = [Document(page_content=t) for t in texts]
+st.write(docs)
     
     #st.write(string_data)
     # Create multiple documents
