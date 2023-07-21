@@ -40,14 +40,14 @@ if uploaded_file:
     #docs = [Document(page_content=t) for t in texts]
     #st.write(texts)
 
-def generate_res(data):
+def generate_res(text):
      
     # Instantiate the LLM model
     llm = OpenAI(temperature=0, openai_api_key=genai_api_key)
     
     # Text summarization
     text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=10)
-    texts = text_splitter.create_documents(data)
+    texts = text_splitter.create_documents(text)
     #docs = [Document(page_content=t) for t in texts]
 
     chain = load_summarize_chain(llm, chain_type='map_reduce')
