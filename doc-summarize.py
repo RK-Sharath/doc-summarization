@@ -107,6 +107,7 @@ def main():
         os.environ["GENAI_API_KEY"] = st.session_state.genai_api_key
         
     user_prompt = st.text_input("Enter the user prompt")
+    genai_api_key=st.session_state.genai_api_key
     creds = Credentials(api_key=genai_api_key, api_endpoint=genai_api_url)
     # Define parameters
     params = GenerateParams(decoding_method=decoding_method, temperature=temperature, max_new_tokens=max_new_tokens, min_new_tokens=min_new_tokens, repetition_penalty=repetition_penalty)
