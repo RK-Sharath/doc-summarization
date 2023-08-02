@@ -112,7 +112,7 @@ def main():
          # Load and process the uploaded PDF or TXT files.
         text = load_docs(uploaded_files)
         total_text = len(text)
-        st.write(f"Number of text chunks: {total_text}")
+        st.write(f"Number of tokens: {total_text}")
         st.write("Documents uploaded and processed.")
         # Split the document into chunks
         docs = setup_documents(text, chunk_size, chunk_overlap)
