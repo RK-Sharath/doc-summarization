@@ -57,17 +57,12 @@ def load_docs(files):
     return all_text
 
 
-#text = load_docs(uploaded_files)
-#st.write(text)
 
+@st.cache_resource
 def setup_documents(text, chunk_size, chunk_overlap):
 
     st.info("`Splitting doc ...`")
-
-    #docs_raw = text
-    #docs_raw_text = [doc.page_content for doc in docs_raw]
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap)
-    #docs = text_splitter.create_documents(docs_raw_text)
     docs_split = text_splitter.split_text(text)
     docs = text_splitter.create_documents(docs_split)
     return docs
