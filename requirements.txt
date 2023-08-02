@@ -1,10 +1,7 @@
+streamlit
 ibm-generative-ai[langchain]
-langchain==0.0.144
+langchain
+ibm-generative-ai
 PyPDF2==3.0.1
-streamlit==1.21.0
-tiktoken==0.3.1
-tokenizers==0.13.3
-scikit-learn==1.2.2
-InstructorEmbedding
-sentence_transformers
-chromadb
+pypdf
+transformers
