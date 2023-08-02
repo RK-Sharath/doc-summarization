@@ -109,32 +109,33 @@ def main():
         if 'last_uploaded_files' not in st.session_state or st.session_state.last_uploaded_files != uploaded_files:
             st.session_state.last_uploaded_files = uploaded_files
 
-    # Load and process the uploaded PDF or TXT files.
-    text = load_docs(uploaded_files)
-    st.write("Documents uploaded and processed.")
-    # Split the document into chunks
-    docs = setup_documents(text, chunk_size, chunk_overlap)
+         # Load and process the uploaded PDF or TXT files.
+        text = load_docs(uploaded_files)
+        st.write("Documents uploaded and processed.")
+        # Split the document into chunks
+        docs = setup_documents(text, chunk_size, chunk_overlap)
 
-    # Display the number of text chunks
-    num_chunks = len(docs)
-    st.write(f"Number of text chunks: {num_chunks}")
+        # Display the number of text chunks
+        num_chunks = len(docs)
+        st.write(f"Number of text chunks: {num_chunks}")
 
-    genai_api_key=st.session_state.genai_api_key
-    creds = Credentials(api_key=genai_api_key, api_endpoint=genai_api_url)
+        genai_api_key=st.session_state.genai_api_key
+        creds = Credentials(api_key=genai_api_key, api_endpoint=genai_api_url)
 
-    # Define parameters
-    params = GenerateParams(decoding_method=decoding_method, temperature=temperature, max_new_tokens=max_new_tokens, min_new_tokens=min_new_tokens, repetition_penalty=repetition_penalty)
-    # Instantiate LLM model
-    llm=LangChainInterface(model=model, params=params, credentials=creds)
+        # Define parameters
+        params = GenerateParams(decoding_method=decoding_method, temperature=temperature, max_new_tokens=max_new_tokens, min_new_tokens=min_new_tokens, repetition_penalty=repetition_penalty)
+        # Instantiate LLM model
+        llm=LangChainInterface(model=model, params=params, credentials=creds)
 
-    st.write("Ready to summarize documents.")
-    user_prompt = st.text_input("Enter the prompt")
-    if user_prompt:
-        with st.spinner('Working on it...'):
-            result = custom_summary(docs,llm, user_prompt, chain_type, num_summaries)
-            st.write("Summaries:")
+        st.write("Ready to summarize documents.")
+        user_prompt = st.text_input("Enter the prompt")
+        if user_prompt:
+            with st.spinner('Working on it...'):
+                result = custom_summary(docs,llm, user_prompt, chain_type, num_summaries)
+                st.write("Summaries:")
             for summary in result:
                 st.write(summary)
+
 
 if __name__ == "__main__":
     main()
