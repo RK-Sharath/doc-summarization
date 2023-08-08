@@ -127,7 +127,7 @@ def main():
         creds = Credentials(api_key=genai_api_key, api_endpoint=genai_api_url)
 
         # Define parameters
-        params = GenerateParams(decoding_method=decoding_method, temperature=temperature, max_new_tokens=max_new_tokens, min_new_tokens=min_new_tokens, repetition_penalty=repetition_penalty, top_k=top_p, top_k=top_p)
+        params = GenerateParams(decoding_method=decoding_method, temperature=temperature, max_new_tokens=max_new_tokens, min_new_tokens=min_new_tokens, repetition_penalty=repetition_penalty, top_k=top_k, top_p=top_p)
         # Instantiate LLM model
         llm=LangChainInterface(model=model, params=params, credentials=creds)
 
