@@ -8,6 +8,7 @@
 * Update the credentials API Key & URL from BAM/Workbench in the UI and you are all set to start prompting.
 * All the hyperparameters are configurable. Play around with different combinations to get the desired results.
 * Choose google/flan-t5-xxl as the Watsonx LLM model to get started as it gives good results.
+* You can generate multiple summaries of the same document and choose the output as per your expectations.
 
 ### Sample Prompts
 
