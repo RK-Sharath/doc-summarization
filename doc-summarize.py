@@ -23,7 +23,7 @@ model = st.radio("Select the Watsonx LLM model",('google/flan-t5-xl','google/fla
 genai_api_url = st.sidebar.text_input("GenAI API URL", type="password", value="https://bam-api.res.ibm.com/v1")
 max_new_tokens = st.sidebar.number_input("Select max new tokens", value=600)
 min_new_tokens = st.sidebar.number_input("Select min new tokens", value=150)
-chunk_size = st.sidebar.number_input("Select chunk size", value=1200)
+chunk_size = st.sidebar.number_input("Select chunk size", value=1000)
 chunk_overlap = st.sidebar.number_input("Select chunk overlap", value=100)
 chain_type = st.sidebar.selectbox("Chain Type", ["map_reduce", "stuff", "refine"])
 with st.sidebar:
